@@ -285,7 +285,7 @@
 
     .qf-trophy {
       font-size: 56px;
-      margin-bottom: 1rem;
+
       display: block;
       animation: qfBounce 2s infinite ease-in-out;
     }
@@ -358,12 +358,15 @@
     }
 
     @media (max-width: 480px) {
-      .header-inner { height: 54px; padding: 0 1rem; }
       .logo-text { font-size: 15px; }
       .live-pill { display: none; }
       .qf-card { padding: 1.75rem 1.25rem; border-radius: 18px; }
       .qf-q { font-size: 19px; }
-      .qf-opt { font-size: 16px; padding: 16px 12px; }
+      .qf-opt { font-size: 18px; padding: 16px 12px; }
       .qf-win-title { font-size: 26px; }
       .qf-claim-btn { font-size: 15px; padding: 18px; }
     }
+
+    img {
+    width: 50%;
+}
