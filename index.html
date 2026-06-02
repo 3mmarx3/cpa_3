@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Opportunity</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/style/mian.css">
+
+</head>
+<body>
+
+  <div class="bg-symbols" id="bgSymbols"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-logo" href="#">
+        <div class="logo-icon">💰</div>
+        <span class="logo-text">Earn<span>Pro</span></span>
+      </a>
+      <div class="header-icons">
+        <div class="live-pill">
+          <span class="live-dot"></span>
+          Live
+        </div>
+        <button class="icon-btn" title="Home">
+          <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        </button>
+        <button class="icon-btn" title="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5l4 4"/></svg>
+        </button>
+        <button class="icon-btn" title="Notifications">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="header-divider"></div>
+        <button class="icon-btn" title="Profile">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="qf-wrap">
+    <div class="qf-card">
+
+      <div class="qf-badge">✦ Exclusive Offer — Limited Spots</div>
+
+      <div class="qf-progress" id="qfProgress">
+        <div class="qf-progress-dot active" id="dot1"></div>
+        <div class="qf-progress-dot" id="dot2"></div>
+        <div class="qf-progress-dot" id="dot3"></div>
+      </div>
+
+      <div id="step1" class="qf-step active">
+        <span class="qf-step-label">Step 1 of 3</span>
+        <p class="qf-q">Do you have any previous experience working online?</p>
+        <div class="qf-options">
+          <button class="qf-opt" onclick="goNext(1,2)">Yes, I have experience</button>
+          <button class="qf-opt" onclick="goNext(1,2)">No, I'm just starting out</button>
+          <button class="qf-opt" onclick="goNext(1,2)">A little — still learning</button>
+        </div>
+      </div>
+
+      <div id="step2" class="qf-step">
+        <span class="qf-step-label">Step 2 of 3</span>
+        <p class="qf-q">How many hours can you dedicate each day?</p>
+        <div class="qf-options">
+          <button class="qf-opt" onclick="goNext(2,3)">Less than 1 hour</button>
+          <button class="qf-opt" onclick="goNext(2,3)">1 – 3 hours</button>
+          <button class="qf-opt" onclick="goNext(2,3)">More than 3 hours</button>
+        </div>
+      </div>
+
+      <div id="step3" class="qf-step">
+        <span class="qf-step-label">Step 3 of 3</span>
+        <p class="qf-q">Are you ready to start earning right now?</p>
+        <div class="qf-options">
+          <button class="qf-opt" onclick="showResult()">I'm Absolutely Ready!</button>
+          <button class="qf-opt" onclick="showResult()">I need a little more info</button>
+          <button class="qf-opt" onclick="showResult()">Yes, let's get started</button>
+        </div>
+      </div>
+
+      <div id="result" class="qf-result">
+        <span class="qf-trophy">🏆</span>
+        <p class="qf-win-title">Congratulations!</p>
+        <p class="qf-win-sub">
+          Your application has been <span>approved</span>. You've qualified for the grand prize.<br>
+          Tap the button below to activate your account and claim your reward instantly.
+        </p>
+        <button class="qf-claim-btn" onclick="window.location.href='https://google.com'">
+          💰 Tap Here to Claim Your Prize 💰
+        </button>
+        <p class="qf-note">You'll be redirected to complete the final step.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    var sizes   = [60, 80, 100, 120, 90, 70, 110, 85, 95, 75];
+    var container = document.getElementById('bgSymbols');
+
+    for (var i = 0; i < 22; i++) {
+      var el = document.createElement('div');
+      el.className = 'bg-sym';
+      el.textContent = symbols[i % symbols.length];
+      el.style.fontSize = sizes[i % sizes.length] + 'px';
+      el.style.left = (Math.random() * 100) + '%';
+      el.style.top  = (Math.random() * 100) + '%';
+      el.style.transform = 'rotate(' + (Math.random() * 60 - 30) + 'deg)';
+      el.style.opacity = (Math.random() * 0.5 + 0.3).toString();
+      container.appendChild(el);
+    }
+
+    function goNext(from, to) {
+      document.getElementById('step' + from).classList.remove('active');
+      document.getElementById('step' + to).classList.add('active');
+      for (var i = 1; i <= 3; i++) {
+        var d = document.getElementById('dot' + i);
+        d.classList.remove('active', 'done');
+        if (i < to) d.classList.add('done');
+        else if (i === to) d.classList.add('active');
+      }
+    }
+
+    function showResult() {
+      document.getElementById('step3').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('qfProgress').style.display = 'none';
+
+      var end = Date.now() + 4500;
+      var colors = ['#fbbf24', '#f59e0b', '#34d399', '#60a5fa', '#f9fafb'];
+
+      (function frame() {
+        confetti({ particleCount: 6, angle: 60,  spread: 55, origin: { x: 0 }, colors: colors });
+        confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+
+      confetti({ particleCount: 150, spread: 90, origin: { y: 0.55 }, colors: colors });
+    }
+  </script>
+
+</body>
+</html>
